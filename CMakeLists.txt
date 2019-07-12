@@ -13,24 +13,18 @@
 #                              containing gperf binary
 #   NEBULA_FLEX_ROOT        -- Specify the root directory for flex
 #   NEBULA_BISON_ROOT       -- Specify the root directory for bison
-#   NEBULA_READLINE_ROOT    -- Specify the root directory for readline
 #   NEBULA_NCURSES_ROOT     -- Specify the root directory for ncurses
 #   NEBULA_KRB5_ROOT        -- Specify the root directory for KRB5
 #   NEBULA_LIBUNWIND_ROOT   -- Specify the root directory for libunwind
 #   NEBULA_OPENSSL_ROOT     -- Specify the root directory for openssl
 #   NEBULA_BOOST_ROOT       -- Specify the root directory for boost
 #
-#   ENABLE_JEMALLOC         -- Link jemalloc into all executables
 #
 cmake_minimum_required(VERSION 3.0.0)
 
 project("Nebula-3rdparty" C CXX)
 
 set(CMAKE_SKIP_RPATH TRUE)
-
-option(ENABLE_JEMALLOC "Whether to link jemalloc to all executables" ON)
-
-enable_testing()
 
 if (!CMAKE_CXX_COMPILER)
     message(FATAL_ERROR "No C++ compiler found")
@@ -94,12 +88,6 @@ if(NOT ${NEBULA_BOOST_ROOT} STREQUAL "")
     list(INSERT CMAKE_LIBRARY_PATH 0 ${NEBULA_BOOST_ROOT}/lib)
 endif()
 
-if(NOT ${NEBULA_READLINE_ROOT} STREQUAL "")
-    message(STATUS "Specified NEBULA_READLINE_ROOT: " ${NEBULA_READLINE_ROOT})
-    list(INSERT CMAKE_INCLUDE_PATH 0 ${NEBULA_READLINE_ROOT}/include)
-    list(INSERT CMAKE_LIBRARY_PATH 0 ${NEBULA_READLINE_ROOT}/lib)
-endif()
-
 if(NOT ${NEBULA_NCURSES_ROOT} STREQUAL "")
     message(STATUS "Specified NEBULA_NCURSES_ROOT: " ${NEBULA_NCURSES_ROOT})
     list(INSERT CMAKE_INCLUDE_PATH 0 ${NEBULA_NCURSES_ROOT}/include)
@@ -139,7 +127,6 @@ find_package(GPERF 2.8 REQUIRED)
 find_package(Libunwind REQUIRED)
 find_package(BISON REQUIRED)
 find_package(FLEX REQUIRED)
-find_package(Readline REQUIRED)
 find_package(NCURSES REQUIRED)
 find_package(LibLZMA MODULE)
 
@@ -173,7 +160,6 @@ include_directories(SYSTEM ${OPENSSL_INCLUDE_DIR})
 include_directories(SYSTEM ${KRB5_INCLUDE_DIRS})
 include_directories(SYSTEM ${FLEX_INCLUDE_DIRS})
 include_directories(SYSTEM ${NCURSES_INCLUDE_DIR})
-include_directories(SYSTEM ${Readline_INCLUDE_DIR})
 
 link_directories(
     ${NEBULA_HOME}/third-party/bzip2/_install/bzip2/lib
