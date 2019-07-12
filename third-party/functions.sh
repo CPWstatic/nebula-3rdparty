@@ -38,7 +38,7 @@ function prepareBuild() {
     tar -zxf ../$SOURCE_TAR_BALL_NAME --keep-newer-files 2> /dev/null
 
     SOURCE_DIR=${BUILD_PATH}/${PROJECT_NAME}${src_dir}
-    INSTALL_PATH=$CURR_DIR/_install
+    INSTALL_PATH=$CURR_DIR/_install/${prj_name}
 
     NEBULA_INCLUDE_DIRS=""
     NEBULA_LIB_DIRS=""

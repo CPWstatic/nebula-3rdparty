@@ -8,13 +8,13 @@ prepareBuild "proxygen" "/proxygen"
 cd $SOURCE_DIR/lib/test
 ln -s $CURR_DIR/googletest-release-1.8.0.zip release-1.8.0.zip
 
-double_conversion_release=$THIRD_PARTY_DIR/double-conversion/_install
-libevent_release=$THIRD_PARTY_DIR/libevent/_install
-gflags_release=$THIRD_PARTY_DIR/gflags/_install
-glog_release=$THIRD_PARTY_DIR/glog/_install
-folly_release=$THIRD_PARTY_DIR/folly/_install
-wangle_release=$THIRD_PARTY_DIR/wangle/_install
-zlib_release=$THIRD_PARTY_DIR/zlib/_install
+double_conversion_release=$THIRD_PARTY_DIR/double-conversion/_install/double-conversion
+libevent_release=$THIRD_PARTY_DIR/libevent/_install/libevent
+gflags_release=$THIRD_PARTY_DIR/gflags/_install/gflags
+glog_release=$THIRD_PARTY_DIR/glog/_install/glog
+folly_release=$THIRD_PARTY_DIR/folly/_install/folly
+wangle_release=$THIRD_PARTY_DIR/wangle/_install/wangle
+zlib_release=$THIRD_PARTY_DIR/zlib/_install/zlib
 
 echo
 echo "Start building $PROJECT_NAME with $NEBULA_CXX_COMPILER ($CXX_VER_STR)"

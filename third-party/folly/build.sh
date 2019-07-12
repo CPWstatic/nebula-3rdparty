@@ -4,13 +4,13 @@ source ../functions.sh
 
 prepareBuild "folly"
 
-double_conversion_release=$THIRD_PARTY_DIR/double-conversion/_install
-libevent_release=$THIRD_PARTY_DIR/libevent/_install
-gflags_release=$THIRD_PARTY_DIR/gflags/_install
-glog_release=$THIRD_PARTY_DIR/glog/_install
-zlib_release=$THIRD_PARTY_DIR/zlib/_install
-zstd_release=$THIRD_PARTY_DIR/zstd/_install
-snappy_release=$THIRD_PARTY_DIR/snappy/_install
+double_conversion_release=$THIRD_PARTY_DIR/double-conversion/_install/double-conversion
+libevent_release=$THIRD_PARTY_DIR/libevent/_install/libevent
+gflags_release=$THIRD_PARTY_DIR/gflags/_install/gflags
+glog_release=$THIRD_PARTY_DIR/glog/_install/glog
+zlib_release=$THIRD_PARTY_DIR/zlib/_install/zlib
+zstd_release=$THIRD_PARTY_DIR/zstd/_install/zstd
+snappy_release=$THIRD_PARTY_DIR/snappy/_install/snappy
 
 echo
 echo "Start building $PROJECT_NAME with $NEBULA_CXX_COMPILER ($CXX_VER_STR)"

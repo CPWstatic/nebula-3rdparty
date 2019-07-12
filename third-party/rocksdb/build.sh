@@ -4,10 +4,10 @@ source ../functions.sh
 
 prepareBuild "rocksdb"
 
-zlib_release=$THIRD_PARTY_DIR/zlib/_install
-zstd_release=$THIRD_PARTY_DIR/zstd/_install
-snappy_release=$THIRD_PARTY_DIR/snappy/_install
-jemalloc_release=$THIRD_PARTY_DIR/jemalloc/_install
+zlib_release=$THIRD_PARTY_DIR/zlib/_install/zlib
+zstd_release=$THIRD_PARTY_DIR/zstd/_install/zstd
+snappy_release=$THIRD_PARTY_DIR/snappy/_install/snappy
+jemalloc_release=$THIRD_PARTY_DIR/jemalloc/_install/jemalloc
 
 echo
 echo "Start building $PROJECT_NAME with $NEBULA_C_COMPILER ($CC_VER_STR)"

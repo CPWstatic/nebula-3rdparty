@@ -4,9 +4,9 @@ source ../functions.sh
 
 prepareBuild "glog"
 
-double_conversion_release=$THIRD_PARTY_DIR/double-conversion/_install
-gflags_release=$THIRD_PARTY_DIR/gflags/_install
-libevent_release=$THIRD_PARTY_DIR/libevent/_install
+double_conversion_release=$THIRD_PARTY_DIR/double-conversion/_install/double-conversion
+gflags_release=$THIRD_PARTY_DIR/gflags/_install/gflags
+libevent_release=$THIRD_PARTY_DIR/libevent/_install/libevent
 
 echo
 echo "Start building $PROJECT_NAME with $NEBULA_CXX_COMPILER ($CXX_VER_STR)"

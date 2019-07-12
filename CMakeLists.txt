@@ -1,0 +1,255 @@
+# Copyright (c) 2018 vesoft inc. All rights reserved.
+#
+# This source code is licensed under Apache 2.0 License,
+# attached with Common Clause Condition 1.0, found in the LICENSES directory.
+#
+# The build can be controlled by defining following variables on the
+# <cmake> command line
+#
+#   CMAKE_C_COMPILER        -- Specify the compiler for C language
+#   CMAKE_CXX_COMPILER      -- Specify the compiler for C++ language
+
+#   NEBULA_GPERF_BIN_DIR    -- Specify the full path to the directory
+#                              containing gperf binary
+#   NEBULA_FLEX_ROOT        -- Specify the root directory for flex
+#   NEBULA_BISON_ROOT       -- Specify the root directory for bison
+#   NEBULA_READLINE_ROOT    -- Specify the root directory for readline
+#   NEBULA_NCURSES_ROOT     -- Specify the root directory for ncurses
+#   NEBULA_KRB5_ROOT        -- Specify the root directory for KRB5
+#   NEBULA_LIBUNWIND_ROOT   -- Specify the root directory for libunwind
+#   NEBULA_OPENSSL_ROOT     -- Specify the root directory for openssl
+#   NEBULA_BOOST_ROOT       -- Specify the root directory for boost
+#
+#   ENABLE_JEMALLOC         -- Link jemalloc into all executables
+#
+cmake_minimum_required(VERSION 3.0.0)
+
+project("Nebula-3rdparty" C CXX)
+
+set(CMAKE_SKIP_RPATH TRUE)
+
+option(ENABLE_JEMALLOC "Whether to link jemalloc to all executables" ON)
+
+enable_testing()
+
+if (!CMAKE_CXX_COMPILER)
+    message(FATAL_ERROR "No C++ compiler found")
+endif()
+
+set(CMAKE_CXX_STANDARD 14)
+
+set(CMAKE_EXE_LINKER_FLAGS "-static-libstdc++")
+
+# CMake macro to specify number of jobs to build third-party
+if (NOT THIRD_PARTY_JOBS)
+    set(THIRD_PARTY_JOBS 2)
+endif(NOT THIRD_PARTY_JOBS)
+
+# Possible values are Debug, Release, RelWithDebInfo, MinSizeRel
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE "Release")
+endif(NOT CMAKE_BUILD_TYPE)
+
+if(NOT ${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+    message(STATUS "Set macro _FORTIFY_SOURCE=2")
+    add_definitions(-D_FORTIFY_SOURCE=2)
+endif()
+
+message(STATUS "CMAKE_BUILD_TYPE = ${CMAKE_BUILD_TYPE} "
+               "(Options are: Debug, Release, RelWithDebInfo, MinSizeRel)")
+
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "_build")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "_build")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "_build")
+
+# Set the project home dir
+set(NEBULA_HOME ${CMAKE_CURRENT_SOURCE_DIR})
+add_definitions(-DNEBULA_HOME=${NEBULA_HOME})
+
+
+# To include customized FindXXX.cmake modules
+set(CMAKE_MODULE_PATH "${NEBULA_HOME}/cmake" ${CMAKE_MODULE_PATH})
+
+if(NOT ${NEBULA_KRB5_ROOT} STREQUAL "")
+    message(STATUS "Specified NEBULA_KRB5_ROOT: " ${NEBULA_KRB5_ROOT})
+    list(INSERT CMAKE_INCLUDE_PATH 0 ${NEBULA_KRB5_ROOT}/include)
+    list(INSERT CMAKE_LIBRARY_PATH 0 ${NEBULA_KRB5_ROOT}/lib)
+    list(INSERT CMAKE_PROGRAM_PATH 0 ${NEBULA_KRB5_ROOT}/bin)
+endif()
+
+if(NOT ${NEBULA_LIBUNWIND_ROOT} STREQUAL "")
+    message(STATUS "Specified NEBULA_LIBUNWIND_ROOT: " ${NEBULA_LIBUNWIND_ROOT})
+    list(INSERT CMAKE_INCLUDE_PATH 0 ${NEBULA_LIBUNWIND_ROOT}/include)
+    list(INSERT CMAKE_LIBRARY_PATH 0 ${NEBULA_LIBUNWIND_ROOT}/lib)
+endif()
+
+if(NOT ${NEBULA_OPENSSL_ROOT} STREQUAL "")
+    message(STATUS "Specified NEBULA_OPENSSL_ROOT: " ${NEBULA_OPENSSL_ROOT})
+    list(INSERT CMAKE_INCLUDE_PATH 0 ${NEBULA_OPENSSL_ROOT}/include)
+    list(INSERT CMAKE_LIBRARY_PATH 0 ${NEBULA_OPENSSL_ROOT}/lib)
+endif()
+
+if(NOT ${NEBULA_BOOST_ROOT} STREQUAL "")
+    list(INSERT CMAKE_INCLUDE_PATH 0 ${NEBULA_BOOST_ROOT}/include)
+    list(INSERT CMAKE_LIBRARY_PATH 0 ${NEBULA_BOOST_ROOT}/lib)
+endif()
+
+if(NOT ${NEBULA_READLINE_ROOT} STREQUAL "")
+    message(STATUS "Specified NEBULA_READLINE_ROOT: " ${NEBULA_READLINE_ROOT})
+    list(INSERT CMAKE_INCLUDE_PATH 0 ${NEBULA_READLINE_ROOT}/include)
+    list(INSERT CMAKE_LIBRARY_PATH 0 ${NEBULA_READLINE_ROOT}/lib)
+endif()
+
+if(NOT ${NEBULA_NCURSES_ROOT} STREQUAL "")
+    message(STATUS "Specified NEBULA_NCURSES_ROOT: " ${NEBULA_NCURSES_ROOT})
+    list(INSERT CMAKE_INCLUDE_PATH 0 ${NEBULA_NCURSES_ROOT}/include)
+    list(INSERT CMAKE_LIBRARY_PATH 0 ${NEBULA_NCURSES_ROOT}/lib)
+endif()
+
+if(NOT ${NEBULA_FLEX_ROOT} STREQUAL "")
+    message(STATUS "Specified NEBULA_FLEX_ROOT: " ${NEBULA_FLEX_ROOT})
+    list(INSERT CMAKE_INCLUDE_PATH 0 ${NEBULA_FLEX_ROOT}/include)
+    list(INSERT CMAKE_LIBRARY_PATH 0 ${NEBULA_FLEX_ROOT}/lib)
+    list(INSERT CMAKE_PROGRAM_PATH 0 ${NEBULA_FLEX_ROOT}/bin)
+endif()
+
+if(NOT ${NEBULA_BISON_ROOT} STREQUAL "")
+    message(STATUS "Specified NEBULA_BISON_ROOT: " ${NEBULA_BISON_ROOT})
+    list(INSERT CMAKE_LIBRARY_PATH 0 ${NEBULA_BISON_ROOT}/lib)
+    list(INSERT CMAKE_PROGRAM_PATH 0 ${NEBULA_BISON_ROOT}/bin)
+endif()
+
+if(NOT ${NEBULA_GPERF_BIN_DIR} STREQUAL "")
+    message(STATUS "Specified NEBULA_GPERF_BIN_DIR: " ${NEBULA_GPERF_BIN_DIR})
+    list(INSERT CMAKE_PROGRAM_PATH 0 ${NEBULA_GPERF_BIN_DIR})
+endif()
+
+
+string(REPLACE ";" ":" INCLUDE_PATH_STR "${CMAKE_INCLUDE_PATH}")
+string(REPLACE ";" ":" LIBRARY_PATH_STR "${CMAKE_LIBRARY_PATH}")
+string(REPLACE ";" ":" PROGRAM_PATH_STR "${CMAKE_PROGRAM_PATH}")
+message(STATUS "CMAKE_INCLUDE_PATH: " ${INCLUDE_PATH_STR})
+message(STATUS "CMAKE_LIBRARY_PATH: " ${LIBRARY_PATH_STR})
+message(STATUS "CMAKE_PROGRAM_PATH: " ${PROGRAM_PATH_STR})
+
+find_package(Boost REQUIRED)
+find_package(OpenSSL REQUIRED)
+find_package(Krb5 REQUIRED gssapi)
+find_package(GPERF 2.8 REQUIRED)
+find_package(Libunwind REQUIRED)
+find_package(BISON REQUIRED)
+find_package(FLEX REQUIRED)
+find_package(Readline REQUIRED)
+find_package(NCURSES REQUIRED)
+find_package(LibLZMA MODULE)
+
+add_compile_options(-Wall)
+add_compile_options(-Werror)
+add_compile_options(-Wunused-parameter)
+add_compile_options(-Wshadow)
+
+# This requries GCC 5.1+
+add_compile_options(-Wsuggest-override)
+
+include_directories(SYSTEM ${NEBULA_HOME}/third-party/bzip2/_install/bzip2/include)
+include_directories(SYSTEM ${NEBULA_HOME}/third-party/double-conversion/_install/double-conversion/include)
+include_directories(SYSTEM ${NEBULA_HOME}/third-party/fatal/_install/fatal/include)
+include_directories(SYSTEM ${NEBULA_HOME}/third-party/fbthrift/_install/fbthrift/include)
+include_directories(SYSTEM ${NEBULA_HOME}/third-party/folly/_install/folly/include)
+include_directories(SYSTEM ${NEBULA_HOME}/third-party/gflags/_install/gflags/include)
+include_directories(SYSTEM ${NEBULA_HOME}/third-party/glog/_install/glog/include)
+include_directories(SYSTEM ${NEBULA_HOME}/third-party/googletest/_install/googletest/include)
+include_directories(SYSTEM ${NEBULA_HOME}/third-party/jemalloc/_install/jemalloc/include)
+include_directories(SYSTEM ${NEBULA_HOME}/third-party/libevent/_install/libevent/include)
+include_directories(SYSTEM ${NEBULA_HOME}/third-party/mstch/_install/mstch/include)
+include_directories(SYSTEM ${NEBULA_HOME}/third-party/proxygen/_install/proxygen/include)
+include_directories(SYSTEM ${NEBULA_HOME}/third-party/rocksdb/_install/rocksdb/include)
+include_directories(SYSTEM ${NEBULA_HOME}/third-party/snappy/_install/snappy/include)
+include_directories(SYSTEM ${NEBULA_HOME}/third-party/wangle/_install/wangle/include)
+include_directories(SYSTEM ${NEBULA_HOME}/third-party/zlib/_install/zlib/include)
+include_directories(SYSTEM ${NEBULA_HOME}/third-party/zstd/_install/zstd/include)
+include_directories(SYSTEM ${Boost_INCLUDE_DIRS})
+include_directories(SYSTEM ${OPENSSL_INCLUDE_DIR})
+include_directories(SYSTEM ${KRB5_INCLUDE_DIRS})
+include_directories(SYSTEM ${FLEX_INCLUDE_DIRS})
+include_directories(SYSTEM ${NCURSES_INCLUDE_DIR})
+include_directories(SYSTEM ${Readline_INCLUDE_DIR})
+
+link_directories(
+    ${NEBULA_HOME}/third-party/bzip2/_install/bzip2/lib
+    ${NEBULA_HOME}/third-party/double-conversion/_install/double-conversion/lib
+    ${NEBULA_HOME}/third-party/fatal/_install/fatal/lib
+    ${NEBULA_HOME}/third-party/fbthrift/_install/fbthrift/lib
+    ${NEBULA_HOME}/third-party/folly/_install/folly/lib
+    ${NEBULA_HOME}/third-party/gflags/_install/gflags/lib
+    ${NEBULA_HOME}/third-party/glog/_install/glog/lib
+    ${NEBULA_HOME}/third-party/googletest/_install/googletest/lib
+    ${NEBULA_HOME}/third-party/jemalloc/_install/jemalloc/lib
+    ${NEBULA_HOME}/third-party/libevent/_install/libevent/lib
+    ${NEBULA_HOME}/third-party/mstch/_install/mstch/lib
+    ${NEBULA_HOME}/third-party/proxygen/_install/proxygen/lib
+    ${NEBULA_HOME}/third-party/rocksdb/_install/rocksdb/lib
+    ${NEBULA_HOME}/third-party/snappy/_install/snappy/lib
+    ${NEBULA_HOME}/third-party/wangle/_install/wangle/lib
+    ${NEBULA_HOME}/third-party/zlib/_install/zlib/lib
+    ${NEBULA_HOME}/third-party/zstd/_install/zstd/lib
+    ${Boost_LIBRARY_DIRS}
+    ${KRB5_LIBRARY_DIRS}
+)
+
+# All thrift libraries
+set(THRIFT_LIBRARIES
+    thriftcpp2
+    thrift
+    thriftprotocol
+    async
+    protocol
+    transport
+    concurrency
+    security
+    thriftfrozen2
+    thrift-core
+)
+
+
+# All compression libraries
+set(COMPRESSION_LIBRARIES bz2 snappy zstd z)
+if (LIBLZMA_FOUND)
+    include_directories(SYSTEM ${LIBLZMA_INCLUDE_DIRS})
+    list(APPEND COMPRESSION_LIBRARIES ${LIBLZMA_LIBRARIES})
+endif()
+
+if (NOT ENABLE_JEMALLOC)
+    set(JEMALLOC_LIB )
+else()
+    set(JEMALLOC_LIB jemalloc)
+endif()
+
+execute_process(
+    COMMAND ldd --version
+    COMMAND head -1
+    COMMAND cut -d ")" -f 2
+    COMMAND cut -d " " -f 2
+    OUTPUT_VARIABLE GLIBC_VERSION
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+message(STATUS "Glibc version is " ${GLIBC_VERSION})
+
+if (GLIBC_VERSION VERSION_LESS "2.17")
+    set(GETTIME_LIB rt)
+else()
+    set(GETTIME_LIB)
+endif()
+
+add_subdirectory(third-party)
+
+add_custom_target(
+    clean-all
+    COMMAND ${CMAKE_MAKE_PROGRAM} clean
+    COMMAND "find" "." "-name" "CMakeFiles" "|" "xargs" "rm" "-fr"
+    COMMAND "find" "." "-name" "CMakeCache.txt" "|" "xargs" "rm" "-f"
+    COMMAND "find" "." "-name" "cmake_install.cmake" "|" "xargs" "rm" "-f"
+    COMMAND "find" "." "-name" "CTestTestfile.cmake" "|" "xargs" "rm" "-f"
+    COMMAND "find" "." "-name" "Makefile" "|" "xargs" "rm" "-f"
+    DEPENDS clean-third-party
+)

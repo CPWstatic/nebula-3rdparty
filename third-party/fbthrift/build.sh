@@ -4,14 +4,14 @@ source ../functions.sh
 
 prepareBuild "fbthrift"
 
-double_conversion_release=$THIRD_PARTY_DIR/double-conversion/_install
-gflags_release=$THIRD_PARTY_DIR/gflags/_install
-glog_release=$THIRD_PARTY_DIR/glog/_install
-folly_release=$THIRD_PARTY_DIR/folly/_install
-wangle_release=$THIRD_PARTY_DIR/wangle/_install
-mstch_release=$THIRD_PARTY_DIR/mstch/_install
-zlib_release=$THIRD_PARTY_DIR/zlib/_install
-zstd_release=$THIRD_PARTY_DIR/zstd/_install
+double_conversion_release=$THIRD_PARTY_DIR/double-conversion/_install/double-conversion
+gflags_release=$THIRD_PARTY_DIR/gflags/_install/gflags
+glog_release=$THIRD_PARTY_DIR/glog/_install/glog
+folly_release=$THIRD_PARTY_DIR/folly/_install/folly
+wangle_release=$THIRD_PARTY_DIR/wangle/_install/wangle
+mstch_release=$THIRD_PARTY_DIR/mstch/_install/mstch
+zlib_release=$THIRD_PARTY_DIR/zlib/_install/zlib
+zstd_release=$THIRD_PARTY_DIR/zstd/_install/zstd
 
 echo
 echo "Start building $PROJECT_NAME with $NEBULA_CXX_COMPILER ($CXX_VER_STR)"
@@ -50,7 +50,6 @@ if (make $@ all && make install); then
     echo
     echo ">>> $PROJECT_NAME is built and installed successfully <<<"
     echo
-    exit 0
 else
     cd $CURR_DIR
     echo
@@ -59,3 +58,17 @@ else
     exit 1
 fi
 
+# build thrift_jar
+cd $SOURCE_DIR/thrift/lib/java/thrift
+if (mvn clean package); then
+    echo
+    echo ">>> $PROJECT_NAME is built thrift-jar successfully <<<"
+    echo
+else
+    echo
+    echo ">>> $PROJECT_NAME is built thrift-jar failed <<<"
+    echo
+    exit 1
+fi
+
+yes|cp $SOURCE_DIR/thrift/lib/java/thrift/target/thrift-1.0-SNAPSHOT.jar $INSTALL_PATH

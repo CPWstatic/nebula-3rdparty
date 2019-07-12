@@ -4,11 +4,11 @@ source ../functions.sh
 
 prepareBuild "wangle" "/wangle"
 
-double_conversion_release=$THIRD_PARTY_DIR/double-conversion/_install
-gflags_release=$THIRD_PARTY_DIR/gflags/_install
-glog_release=$THIRD_PARTY_DIR/glog/_install
-folly_release=$THIRD_PARTY_DIR/folly/_install
-libevent_release=$THIRD_PARTY_DIR/libevent/_install
+double_conversion_release=$THIRD_PARTY_DIR/double-conversion/_install/double-conversion
+gflags_release=$THIRD_PARTY_DIR/gflags/_install/gflags
+glog_release=$THIRD_PARTY_DIR/glog/_install/glog
+folly_release=$THIRD_PARTY_DIR/folly/_install/folly
+libevent_release=$THIRD_PARTY_DIR/libevent/_install/libevent
 
 echo
 echo "Start building $PROJECT_NAME with $NEBULA_CXX_COMPILER ($CXX_VER_STR)"
