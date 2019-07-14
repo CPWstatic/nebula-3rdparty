@@ -1,0 +1,15 @@
+*.swp
+*.so
+
+_build
+_build.log
+_install
+install_manifest.txt
+
+CMakeCache.txt
+Makefile
+cmake_install.cmake
+CTestTestfile.cmake
+CMakeFiles/
+Testing/
+target/
