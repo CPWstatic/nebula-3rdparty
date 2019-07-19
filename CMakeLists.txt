@@ -221,6 +221,8 @@ execute_process(
 )
 message(STATUS "Glibc version is " ${GLIBC_VERSION})
 
+SET(THIRDPARTY_PATH "/opt/nebula/third-party")
+
 if (GLIBC_VERSION VERSION_LESS "2.17")
     set(GETTIME_LIB rt)
 else()

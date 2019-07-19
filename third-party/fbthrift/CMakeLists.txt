@@ -16,6 +16,8 @@ build_external(
     tgt_glog tgt_gflags tgt_folly tgt_wangle tgt_fatal tgt_mstch tgt_zlib tgt_zstd
 )
 
+install(DIRECTORY _install/fbthrift DESTINATION ${THIRDPARTY_PATH})
+
 add_custom_target(
     clean-fbthrift
     COMMAND "rm" "-fr" "_build" "_install" "_build.log"
