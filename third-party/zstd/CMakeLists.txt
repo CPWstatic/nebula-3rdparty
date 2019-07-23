@@ -1,6 +1,6 @@
 build_external(tgt_zstd)
 
-install(DIRECTORY _install/zstd DESTINATION ${THIRDPARTY_PATH})
+install_external(zstd)
 
 add_custom_target(
     clean-zstd

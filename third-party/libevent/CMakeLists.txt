@@ -1,6 +1,6 @@
 build_external(tgt_libevent)
 
-install(DIRECTORY _install/libevent DESTINATION ${THIRDPARTY_PATH})
+install_external(libevent)
 
 add_custom_target(
     clean-libevent

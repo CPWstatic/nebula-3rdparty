@@ -1,6 +1,6 @@
 build_external(tgt_snappy)
 
-install(DIRECTORY _install/snappy DESTINATION ${THIRDPARTY_PATH})
+install_external(snappy)
 
 add_custom_target(
     clean-snappy

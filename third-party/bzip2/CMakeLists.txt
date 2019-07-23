@@ -1,6 +1,6 @@
 build_external(tgt_bzip2)
 
-install(DIRECTORY _install/bzip2 DESTINATION ${THIRDPARTY_PATH})
+install_external(bzip2)
 
 add_custom_target(
     clean-bzip2

@@ -1,6 +1,6 @@
 build_external(tgt_double-conversion)
 
-install(DIRECTORY _install/double-conversion DESTINATION ${THIRDPARTY_PATH})
+install_external(double-conversion)
 
 add_custom_target(
     clean-double-conversion

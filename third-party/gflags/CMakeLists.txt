@@ -1,6 +1,6 @@
 build_external(tgt_gflags)
 
-install(DIRECTORY _install/gflags DESTINATION ${THIRDPARTY_PATH})
+install_external(gflags)
 
 add_custom_target(
     clean-gflags

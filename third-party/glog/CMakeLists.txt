@@ -3,7 +3,7 @@ build_external(
     tgt_gflags tgt_libevent tgt_double-conversion
 )
 
-install(DIRECTORY _install/glog DESTINATION ${THIRDPARTY_PATH})
+install_external(glog)
 
 add_custom_target(
     clean-glog

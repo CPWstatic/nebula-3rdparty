@@ -1,6 +1,6 @@
 build_external(tgt_fatal)
 
-install(DIRECTORY _install/fatal DESTINATION ${THIRDPARTY_PATH})
+install_external(fatal)
 
 add_custom_target(
     clean-fatal

@@ -1,6 +1,6 @@
 build_external(tgt_jemalloc)
 
-install(DIRECTORY _install/jemalloc DESTINATION ${THIRDPARTY_PATH})
+install_external(jemalloc)
 
 add_custom_target(
     clean-jemalloc
