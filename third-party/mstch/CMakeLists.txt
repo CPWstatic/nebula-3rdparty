@@ -1,6 +1,6 @@
 build_external(tgt_mstch)
 
-install(DIRECTORY _install/mstch DESTINATION ${THIRDPARTY_PATH})
+install_external(mstch)
 
 add_custom_target(
     clean-mstch

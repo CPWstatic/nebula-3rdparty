@@ -3,7 +3,7 @@ build_external(
     tgt_folly tgt_wangle tgt_gflags tgt_glog
 )
 
-install(DIRECTORY _install/proxygen DESTINATION ${THIRDPARTY_PATH})
+install_external(proxygen)
 
 add_custom_target(
     clean-proxygen

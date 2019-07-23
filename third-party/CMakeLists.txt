@@ -27,6 +27,15 @@ macro(build_external tgtName)
     )
 endmacro(build_external)
 
+SET(THIRDPARTY_PATH "/opt/nebula/third-party")
+
+macro(install_external target)
+    install(
+        DIRECTORY _install/${target}
+        DESTINATION ${THIRDPARTY_PATH} USE_SOURCE_PERMISSIONS
+    )
+endmacro()
+
 add_subdirectory(bzip2)
 add_subdirectory(double-conversion)
 add_subdirectory(fatal)

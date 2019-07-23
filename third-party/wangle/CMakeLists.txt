@@ -3,7 +3,7 @@ build_external(
     tgt_folly tgt_libevent tgt_gflags tgt_glog tgt_double-conversion
 )
 
-install(DIRECTORY _install/wangle DESTINATION ${THIRDPARTY_PATH})
+install_external(wangle)
 
 add_custom_target(
     clean-wangle

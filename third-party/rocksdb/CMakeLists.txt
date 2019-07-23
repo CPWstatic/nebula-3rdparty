@@ -3,7 +3,7 @@ build_external(
     tgt_bzip2 tgt_snappy tgt_zlib tgt_zstd tgt_jemalloc
 )
 
-install(DIRECTORY _install/rocksdb DESTINATION ${THIRDPARTY_PATH})
+install_external(rocksdb)
 
 add_custom_target(
     clean-rocksdb

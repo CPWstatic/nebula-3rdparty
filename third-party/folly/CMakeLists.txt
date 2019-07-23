@@ -3,7 +3,7 @@ build_external(
     tgt_gflags tgt_glog tgt_zlib tgt_zstd
 )
 
-install(DIRECTORY _install/folly DESTINATION ${THIRDPARTY_PATH})
+install_external(folly)
 
 add_custom_target(
     clean-folly

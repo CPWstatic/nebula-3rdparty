@@ -1,6 +1,6 @@
 build_external(tgt_zlib)
 
-install(DIRECTORY _install/zlib DESTINATION ${THIRDPARTY_PATH})
+install_external(zlib)
 
 add_custom_target(
     clean-zlib

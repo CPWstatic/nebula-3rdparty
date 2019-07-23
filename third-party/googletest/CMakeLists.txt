@@ -3,7 +3,7 @@ build_external(
     tgt_gflags tgt_glog
 )
 
-install(DIRECTORY _install/googletest DESTINATION ${THIRDPARTY_PATH})
+install_external(googletest)
 
 add_custom_target(
     clean-googletest
