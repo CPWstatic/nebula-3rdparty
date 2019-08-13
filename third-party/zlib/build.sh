@@ -29,7 +29,7 @@ if [[ $SOURCE_DIR/configure -nt $SOURCE_DIR/Makefile ||
     fi
 fi
 
-if (make $@); then
+if (make $1); then
     if [[ $SOURCE_DIR/libz.a -nt $INSTALL_PATH/lib/libz.a ]]; then
         if (make install); then
             cd $CURR_DIR

@@ -29,7 +29,7 @@ if [[ $SOURCE_DIR/CMakeLists.txt -nt $SOURCE_DIR/Makefile ||
     fi
 fi
 
-if (make $@ install); then
+if (make $1 install); then
     cd $CURR_DIR
     echo
     echo ">>> $PROJECT_NAME is built and installed successfully <<<"

@@ -12,12 +12,12 @@ export INSTALL_PATH=$INSTALL_PATH
 export CURR_DIR=$CURR_DIR
 
 # Build gtest first
-if !($CURR_DIR/build-gtest.sh "gtest" "$SOURCE_DIR/googletest" $@); then
+if !($CURR_DIR/build-gtest.sh "gtest" "$SOURCE_DIR/googletest" $1); then
     exit 1
 fi
 
 # Then build gmock
-if !($CURR_DIR/build-gmock.sh "gmock" "$SOURCE_DIR/googlemock" $@); then
+if !($CURR_DIR/build-gmock.sh "gmock" "$SOURCE_DIR/googlemock" $1); then
     exit 1
 fi
 

@@ -29,7 +29,7 @@ if [[ $SOURCE_DIR/configure -nt $SOURCE_DIR/Makefile ||
     fi
 fi
 
-if (make $@); then
+if (make $1); then
     if [[ $SOURCE_DIR/.libs/libevent.a -nt $INSTALL_PATH/lib/libevent.a ||
           $SOURCE_DIR/.libs/libevent_core.a -nt $INSTALL_PATH/lib/libevent_core.a ||
           $SOURCE_DIR/.libs/libevent_extra.a -nt $INSTALL_PATH/lib/libevent_extra.a ||
