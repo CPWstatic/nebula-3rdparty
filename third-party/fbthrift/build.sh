@@ -60,7 +60,7 @@ fi
 
 # build thrift_jar
 SKIP_JAVA_JAR=$2
-if [[ "${SKIP_JAVA_JAR}" == "OFF" ]]; then
+if [[ "${SKIP_JAVA_JAR}" == "ON" ]]; then
     echo ">>> SKIP JAVA JAR <<<"
     exit 0
 fi
