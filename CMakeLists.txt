@@ -18,13 +18,20 @@
 #   NEBULA_LIBUNWIND_ROOT   -- Specify the root directory for libunwind
 #   NEBULA_OPENSSL_ROOT     -- Specify the root directory for openssl
 #   NEBULA_BOOST_ROOT       -- Specify the root directory for boost
+#   SKIP_JAVA_JAR           -- Skip building the java thrift jar
+#   THIRDPARTY_PATH         -- Third-party install path
 #
 #
+
 cmake_minimum_required(VERSION 3.0.0)
 
 project("Nebula-3rdparty" C CXX)
 
 set(CMAKE_SKIP_RPATH TRUE)
+
+option(SKIP_JAVA_JAR "Whether to skip building the java fbthrift" ON)
+
+message(STATUS "SKIP_JAVA_JAR = ${SKIP_JAVA_JAR}")
 
 if (!CMAKE_CXX_COMPILER)
     message(FATAL_ERROR "No C++ compiler found")
@@ -63,6 +70,12 @@ add_definitions(-DNEBULA_HOME=${NEBULA_HOME})
 
 # To include customized FindXXX.cmake modules
 set(CMAKE_MODULE_PATH "${NEBULA_HOME}/cmake" ${CMAKE_MODULE_PATH})
+
+if("${THIRDPARTY_PATH}" STREQUAL "")
+    SET(THIRDPARTY_PATH "/opt/nebula/third-party")
+endif()
+
+message(STATUS "THIRDPARTY_PATH = ${THIRDPARTY_PATH}")
 
 if(NOT ${NEBULA_KRB5_ROOT} STREQUAL "")
     message(STATUS "Specified NEBULA_KRB5_ROOT: " ${NEBULA_KRB5_ROOT})

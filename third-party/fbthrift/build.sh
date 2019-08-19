@@ -45,7 +45,7 @@ if [[ $SOURCE_DIR/CMakeLists.txt -nt $SOURCE_DIR/Makefile ||
     fi
 fi
 
-if (make $@ all && make install); then
+if (make $1 all && make install); then
     cd $CURR_DIR
     echo
     echo ">>> $PROJECT_NAME is built and installed successfully <<<"
@@ -59,6 +59,12 @@ else
 fi
 
 # build thrift_jar
+SKIP_JAVA_JAR=$2
+if [[ "${SKIP_JAVA_JAR}" == "ON" ]]; then
+    echo ">>> SKIP JAVA JAR <<<"
+    exit 0
+fi
+
 cd $SOURCE_DIR/thrift/lib/java/thrift
 if (mvn clean package); then
     echo

@@ -22,12 +22,10 @@ macro(build_external tgtName)
             NEBULA_GPERF_BIN_DIR=${NEBULA_GPERF_BIN_DIR}
             NEBULA_GETTIME_NEEDS_POSIX_MACRO=${GETTIME_NEEDS_POSIX_MACRO}
             NEBULA_GETTIME_LDFLAGS=${GETTIME_LDFLAGS}
-            "./build.sh" "-j${THIRD_PARTY_JOBS}" ">" "./_build.log" "2>&1"
+            "./build.sh" "-j${THIRD_PARTY_JOBS}" ${SKIP_JAVA_JAR} ">" "./_build.log" "2>&1"
         DEPENDS ${ARGN}
     )
 endmacro(build_external)
-
-SET(THIRDPARTY_PATH "/opt/nebula/third-party")
 
 macro(install_external target)
     install(

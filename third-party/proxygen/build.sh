@@ -53,7 +53,7 @@ if [[ $SOURCE_DIR/configure -nt $SOURCE_DIR/Makefile ||
     fi
 fi
 
-if (PATH=$NEBULA_GPERF_BIN_DIR:$PATH    make $@); then
+if (PATH=$NEBULA_GPERF_BIN_DIR:$PATH    make $1); then
     if [[ $SOURCE_DIR/lib/.libs/libproxygenlib.a -nt $INSTALL_PATH/lib/libproxygenlib.a ||
           $SOURCE_DIR/httpserver/.libs/libproxygenhttpserver.a -nt $INSTALL_PATH/lib/libproxygenhttpserver.a ||
           $SOURCE_DIR/httpclient/samples/curl/.libs/libproxygencurl.a -nt $INSTALL_PATH/lib/libproxygencurl.a ]]; then

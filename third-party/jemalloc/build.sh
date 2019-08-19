@@ -36,7 +36,7 @@ if [[ $SOURCE_DIR/configure.ac -nt $SOURCE_DIR/Makefile ||
     fi
 fi
 
-if (make $@); then
+if (make $1); then
     if [[ $SOURCE_DIR/lib/libjemalloc.a -nt $INSTALL_PATH/lib/libjemalloc.a ||
           $SOURCE_DIR/lib/libjemalloc_pic.a -nt $INSTALL_PATH/lib/libjemalloc_pic.a ]]; then
         if (make install_bin install_include install_lib); then

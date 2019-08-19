@@ -39,7 +39,7 @@ if [[ $SOURCE_DIR/CMakeLists.txt -nt $SOURCE_DIR/Makefile ||
     fi
 fi
 
-if (make $@); then
+if (make $1); then
     if [[ $SOURCE_DIR/librocksdb.a -nt $INSTALL_PATH/lib/librocksdb.a ]]; then
         echo "===> Ready to install"
         if (make install); then

@@ -31,7 +31,7 @@ if [[ $SOURCE_DIR/CMakeLists.txt -nt $SOURCE_DIR/Makefile ||
     fi
 fi
 
-if (make $@ && make install); then
+if (make $1 && make install); then
     cd $CURR_DIR
     mkdir -p $INSTALL_PATH/include
     cp $SOURCE_DIR/src/*.h $INSTALL_PATH/include/.
