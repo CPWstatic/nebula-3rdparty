@@ -27,7 +27,7 @@ echo
 
 cd $SOURCE_DIR
 
-COMPILER_FLAGS="-fPIC -DPIC    $EXTRA_CXXFLAGS"
+COMPILER_FLAGS="-fPIC -DPIC    $EXTRA_CXXFLAGS -g"
 LINKER_FLAGS="-static-libgcc -static-libstdc++    $EXTRA_LDFLAGS"
 NEBULA_PREFIX_DIRS="$double_conversion_release;$gflags_release;$glog_release;$folly_release;$wangle_release;$mstch_release;$zlib_release;$zstd_release;$NEBULA_PREFIX_DIRS"
 NEBULA_INCLUDE_DIRS="$double_conversion_release/include;$gflags_release/include;$glog_release/include;$folly_release/include;$wangle_release/include;$mstch_release/include;$zlib_release/include;$zstd_release/include;$NEBULA_INCLUDE_DIRS"
@@ -66,7 +66,7 @@ if [[ "${SKIP_JAVA_JAR}" == "ON" ]]; then
 fi
 
 cd $SOURCE_DIR/thrift/lib/java/thrift
-if (mvn clean package); then
+if (mvn clean package install); then
     echo
     echo ">>> $PROJECT_NAME is built thrift-jar successfully <<<"
     echo
