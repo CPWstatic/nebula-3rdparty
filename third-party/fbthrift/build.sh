@@ -66,7 +66,7 @@ if [[ "${SKIP_JAVA_JAR}" == "ON" ]]; then
 fi
 
 cd $SOURCE_DIR/thrift/lib/java/thrift
-if (mvn clean package); then
+if (mvn clean package install); then
     echo
     echo ">>> $PROJECT_NAME is built thrift-jar successfully <<<"
     echo
