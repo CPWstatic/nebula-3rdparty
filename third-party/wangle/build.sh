@@ -24,7 +24,7 @@ echo
 
 cd $SOURCE_DIR
 
-CXXFLAGS="-fPIC -DPIC  $EXTRA_CXXFLAGS"
+CXXFLAGS="-fPIC -DPIC  $EXTRA_CXXFLAGS -g"
 LDFLAGS="$EXTRA_LDFLAGS -lboost_context -lboost_chrono -lboost_thread -lboost_system -lboost_regex -lssl -lstdc++ -levent -lunwind -ldl -lrt"
 NEBULA_INCLUDE_DIRS="$double_conversion_release/include;$gflags_release/include;$glog_release/include;$folly_release/include;$libevent_release/include;$NEBULA_INCLUDE_DIRS"
 NEBULA_LIB_DIRS="$double_conversion_release/lib;$gflags_release/lib;$glog_release/lib;$folly_release/lib;$libevent_release/lib;$NEBULA_LIB_DIRS"
