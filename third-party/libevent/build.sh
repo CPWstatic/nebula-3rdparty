@@ -20,7 +20,7 @@ cd $SOURCE_DIR
 
 if [[ $SOURCE_DIR/configure -nt $SOURCE_DIR/Makefile ||
       $CURR_DIR/build.sh -nt $SOURCE_DIR/Makefile ]]; then
-    if !(CC=$NEBULA_C_COMPILER CPP="$NEBULA_C_COMPILER -E" CXX=$NEBULA_CXX_COMPILER CXXFLAGS="-fPIC -DPIC  $EXTRA_CXXFLAGS" CFLAGS=$CXXFLAGS CPPFLAGS=$CXXFLAGS      LDFLAGS="$EXTRA_LDFLAGS"        $SOURCE_DIR/configure --prefix=$INSTALL_PATH --enable-shared=no); then
+    if !(CC=$NEBULA_C_COMPILER CPP="$NEBULA_C_COMPILER -E" CXX=$NEBULA_CXX_COMPILER CXXFLAGS="-fPIC -DPIC $EXTRA_CXXFLAGS" CFLAGS=$CXXFLAGS CPPFLAGS=$CXXFLAGS LDFLAGS="$EXTRA_LDFLAGS -ldl" $SOURCE_DIR/configure --prefix=$INSTALL_PATH --enable-shared=no); then
         cd $CURR_DIR
         echo
         echo "### $PROJECT_NAME failed to configure the build ###"
@@ -61,4 +61,3 @@ else
     echo
     exit 1
 fi
-
