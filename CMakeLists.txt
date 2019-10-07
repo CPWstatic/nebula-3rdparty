@@ -155,6 +155,7 @@ include_directories(SYSTEM ${NEBULA_HOME}/third-party/snappy/_install/snappy/inc
 include_directories(SYSTEM ${NEBULA_HOME}/third-party/wangle/_install/wangle/include)
 include_directories(SYSTEM ${NEBULA_HOME}/third-party/zlib/_install/zlib/include)
 include_directories(SYSTEM ${NEBULA_HOME}/third-party/zstd/_install/zstd/include)
+include_directories(SYSTEM ${NEBULA_HOME}/third-party/s2geometry/_install/s2geometry/include)
 include_directories(SYSTEM ${Boost_INCLUDE_DIRS})
 include_directories(SYSTEM ${OPENSSL_INCLUDE_DIR})
 include_directories(SYSTEM ${KRB5_INCLUDE_DIRS})
@@ -179,6 +180,7 @@ link_directories(
     ${NEBULA_HOME}/third-party/wangle/_install/wangle/lib
     ${NEBULA_HOME}/third-party/zlib/_install/zlib/lib
     ${NEBULA_HOME}/third-party/zstd/_install/zstd/lib
+    ${NEBULA_HOME}/third-party/s2geometry/_install/s2geometry/lib
     ${Boost_LIBRARY_DIRS}
     ${KRB5_LIBRARY_DIRS}
 )
