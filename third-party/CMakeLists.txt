@@ -58,6 +58,7 @@ add_subdirectory(s2geometry)
 add_custom_target(
     third-party ALL
     DEPENDS tgt_fbthrift tgt_rocksdb tgt_proxygen tgt_googletest tgt_jemalloc
+    tgt_s2geometry
 )
 
 add_custom_target(

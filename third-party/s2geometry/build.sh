@@ -20,7 +20,7 @@ cd $SOURCE_DIR
 
 if [[ $SOURCE_DIR/CMakeLists.txt -nt $SOURCE_DIR/Makefile ||
       $CURR_DIR/build.sh -nt $SOURCE_DIR/Makefile ]]; then
-    if !($NEBULA_CMAKE -DBUILD_SHARED_LIBS=off    $SOURCE_DIR); then
+    if !($NEBULA_CMAKE $CMAKE_FLAGS -DCMAKE_C_FLAGS:STRING="$compiler_flags" -DCMAKE_CXX_FLAGS:STRING="$compiler_flags" -DBUILD_SHARED_LIBS=off    $SOURCE_DIR); then
         cd $CURR_DIR
         echo
         echo "### $PROJECT_NAME failed to configure the build ###"
