@@ -4,6 +4,9 @@ source ../functions.sh
 
 prepareBuild "s2geometry"
 
+gflags_release=$THIRD_PARTY_DIR/gflags/_install/gflags
+glog_release=$THIRD_PARTY_DIR/glog/_install/glog
+
 echo
 echo "Start building $PROJECT_NAME with $NEBULA_C_COMPILER ($CC_VER_STR)"
 echo
@@ -16,11 +19,14 @@ echo
 #    exit 1
 #fi
 
+NEBULA_INCLUDE_DIRS="$gflags_release/include;$glog_release/include;$NEBULA_INCLUDE_DIRS"
+NEBULA_LIB_DIRS="$gflags_release/lib;$glog_release/lib;$NEBULA_LIB_DIRS"
+
 cd $SOURCE_DIR
 
 if [[ $SOURCE_DIR/CMakeLists.txt -nt $SOURCE_DIR/Makefile ||
       $CURR_DIR/build.sh -nt $SOURCE_DIR/Makefile ]]; then
-    if !($NEBULA_CMAKE -DBUILD_SHARED_LIBS=off    $SOURCE_DIR); then
+    if !($NEBULA_CMAKE $CMAKE_FLAGS -DCMAKE_C_FLAGS:STRING="$compiler_flags" -DCMAKE_CXX_FLAGS:STRING="$compiler_flags" -DCMAKE_INCLUDE_PATH="$NEBULA_INCLUDE_DIRS" -DCMAKE_LIBRARY_PATH="$NEBULA_LIB_DIRS" -DBUILD_SHARED_LIBS=off -DWITH_GFLAGS=on -DWITH_GLOG=on -DBUILD_EXAMPLES=off    $SOURCE_DIR); then
         cd $CURR_DIR
         echo
         echo "### $PROJECT_NAME failed to configure the build ###"
