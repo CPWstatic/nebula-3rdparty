@@ -1,4 +1,7 @@
-build_external(tgt_s2geometry)
+build_external(
+    tgt_s2geometry
+    tgt_gflags tgt_glog
+)
 
 install_external(s2geometry)
 
