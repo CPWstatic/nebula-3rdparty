@@ -6,6 +6,7 @@ prepareBuild "s2geometry"
 
 gflags_release=$THIRD_PARTY_DIR/gflags/_install/gflags
 glog_release=$THIRD_PARTY_DIR/glog/_install/glog
+gtest_release=$THIRD_PARTY_DIR/googletest/_install/googletest
 
 echo
 echo "Start building $PROJECT_NAME with $NEBULA_C_COMPILER ($CC_VER_STR)"
@@ -19,8 +20,8 @@ echo
 #    exit 1
 #fi
 
-NEBULA_INCLUDE_DIRS="$gflags_release/include;$glog_release/include;$NEBULA_INCLUDE_DIRS"
-NEBULA_LIB_DIRS="$gflags_release/lib;$glog_release/lib;$NEBULA_LIB_DIRS"
+NEBULA_INCLUDE_DIRS="$gtest_release/include;$gflags_release/include;$glog_release/include;$NEBULA_INCLUDE_DIRS"
+NEBULA_LIB_DIRS="$gtest_release/bin;$gflags_release/lib;$glog_release/lib;$NEBULA_LIB_DIRS"
 
 cd $SOURCE_DIR
 
