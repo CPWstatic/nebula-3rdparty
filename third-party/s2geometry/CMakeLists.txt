@@ -1,6 +1,6 @@
 build_external(
     tgt_s2geometry
-    tgt_gflags tgt_glog tgt_googletest
+    tgt_googletest
 )
 
 install_external(s2geometry)
